@@ -24,7 +24,7 @@ FEATURES
     -- Register View
       --> index link
 
-  User
+  USER FOLDER
     -- Welcome/index page
         --> General Project (SORT)
           - clickable project title
