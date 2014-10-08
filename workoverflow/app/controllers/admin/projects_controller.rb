@@ -1,4 +1,4 @@
-class Admin:PostsController < ApplicationController
+class Admin:ProjectsController < ApplicationController
   #add filter for authentication.
 
   def index
