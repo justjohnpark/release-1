@@ -1,0 +1,36 @@
+FEATURES
+  ADMIN FOLDER
+    -- Welcome/Index View
+      --> General Project (SORT)
+        - clickable project title
+        - vote on a project(ajax)
+      --> clickable logout
+
+    -- Profile View
+      --> My Projects
+        - clickable title
+        - admin index link
+
+    -- Project Show View
+      --> view project
+      --> click to edit, delete, vote on comment/project(ajax), add comment(ajax)
+      --> back link
+
+    -- Login View
+      --> fill in test
+      --> submit button test
+      --> admin index link
+    -- Logout (button -- click)
+    -- Register View
+      --> index link
+
+  User
+    -- Welcome/index page
+        --> General Project (SORT)
+          - clickable project title
+        --> clickable login/reister
+    -- Project Show View
+      --> view project
+      --> back link
+
+pending markers for rspec files
