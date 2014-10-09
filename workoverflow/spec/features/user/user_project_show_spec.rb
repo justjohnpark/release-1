@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "User browsing" do
   context "on project page" do
     it "sees a project title" do
-      pending
+
     end
 
     it "has a sweet header" do
