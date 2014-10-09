@@ -1,5 +1,6 @@
 <%= render 'layouts/users_header' %>
-<h1><%= @project.title %> - <%= @project.votes.length %></h1>
+<h1><%= @project.title %> - <%= @project.votes.length %> Votes</h1>
+<%= @project.description %><br><br>
 <% @project.comments.each do |comment| %>
 <%= comment.content %><br>
 <%= comment.user.name %>

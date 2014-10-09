@@ -15,7 +15,17 @@ describe ProjectsController do
     expect(assigns(:projects).length).to eq 1
   end
 
-  it "has an show action for project view" do
-    pending
+  it "has a show action for project view" do
+    project = Project.create!(title: "Testing with RSpec", description: "Testing with the latest and greatest. I want to learn with friends", category: "Testing", location: "Chicago", remote: false, time_estimation: 5, creator_id: 1)
+    get :show, {id: project.id}
+
+    expect(response).to render_template(:show)
+  end
+
+  it "assigns a project" do
+    project = Project.create!(title: "Testing with RSpec", description: "Testing with the latest and greatest. I want to learn with friends", category: "Testing", location: "Chicago", remote: false, time_estimation: 5, creator_id: 1)
+    get :show, {id: project.id}
+
+    expect(assigns(:project).title).to eq "Testing with RSpec"
   end
 end
