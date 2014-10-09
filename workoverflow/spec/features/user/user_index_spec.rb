@@ -19,7 +19,9 @@ describe "User browsing" do
     end
 
     it "has a sweet header" do
-      pending
+      visit root_path
+      expect(page).to have_content("Register")
     end
+
   end
 end
