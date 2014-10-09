@@ -5,4 +5,8 @@ class ProjectsController < ApplicationController
       render 'admins/index'
     end
   end
+
+  def show
+    @project = Project.find(params[:id])
+  end
 end

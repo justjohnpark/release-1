@@ -1,5 +1,6 @@
 <%= render "layouts/users_header" %>
 
+<h2>Current Projects</h2>
 <div>
   <% @projects.each do |project| %>
     <%= link_to project.title, project_path(project) %> <br>
