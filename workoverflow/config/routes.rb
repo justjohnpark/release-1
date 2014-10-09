@@ -1,8 +1,8 @@
 Workoverflow::Application.routes.draw do
-  root 'project#index'
+  root 'projects#index'
   resources :projects, only: [:index, :show]
 
-  resource :admin do
+  resource :admins do
     resources :projects do
       resources :comments, only: [:new, :create, :destroy]
     end
@@ -12,10 +12,12 @@ Workoverflow::Application.routes.draw do
   # get "/comments(.:format)",          to: "comments#create"
   # get "/comments/:id(.:format)",      to: "comments#destroy"
 
-  get "/login",                       to: "admin#login_form",               as: "login_form" #rename this later, may run into a path error
-  post "/login",                      to: "admin#login",                    as: "login" #rename this later, may run into a path error
-  get "/logout",                      to: "admin#logout",                   as: "logout"
+  get "/login",                       to: "admins#login_form",               as: "login_form" #rename this later, may run into a path error
+  post "/login",                      to: "admins#login",                    as: "login" #rename this later, may run into a path error
+  get "/logout",                      to: "admins#logout",                   as: "logout"
 
+  post "/comments/:id/votes/new",     to: "votes#comment_create",            as: "comment_vote"
+  post "/projects/:id/votes/new",     to: "votes#project_create",            as: "project_vote"
 end
 
 

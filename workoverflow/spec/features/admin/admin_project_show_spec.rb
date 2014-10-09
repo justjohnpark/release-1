@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "User browsing" do
+describe "Admin browsing" do
   context "on project page" do
     it "sees a project title" do
       pending
