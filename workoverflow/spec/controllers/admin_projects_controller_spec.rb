@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AdminProjectsController do
+describe "AdminProjectsController" do #the quotes need to be removed and this line needs to be fixed
   it "has an index action for listing all projects" do
     pending
   end

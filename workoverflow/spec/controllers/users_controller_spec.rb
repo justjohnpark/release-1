@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
-  before(:all) do
-    @user = User.create!(name: "Bob Swinsong", email: "bob@gmail.com", password: "12345", password_confirmation: "12345")
-  end
+  let(:user) { User.create!(name: "Bob Swinsong", email: "bob@gmail.com", password: "12345", password_confirmation: "12345") }
 
   it "has an login_form action" do
     pending
@@ -26,6 +24,9 @@ describe UsersController do
   end
 
   it "has a show action for displaying a user's profile page" do
+    login(user)
 
+    get :show, id: user.id
+    expect(response).to render_template(:show)
   end
 end

@@ -27,7 +27,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(session[:user_id])
+    show_door
+    @user = User.find(params[:id])
   end
 
   def logout
