@@ -1,4 +1,6 @@
-<%= form_tag admins_path %>
+<h1>Register</h1>
+
+<%= form_for @user do |f| %>
   <% if @user.errors.any? %>
   <div id="errors_explanation">
     <h2><%= pluralize(@user.errors.count, "error") %>
@@ -12,27 +14,26 @@
   <% end %>
 
   <div>
-    <%= label_tag :name %><br>
-    <%= text_field_tag :name %>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
   </div>
 
   <div>
-    <%= label_tag :email %><br>
-    <%= text_field_tag :email %>
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
   </div>
 
   <div>
-    <%= label_tag :password %><br>
-    <%= password_field_tag :password %>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
   </div>
 
   <div>
-    <%= label_tag :password_confirmation %><br>
-    <%= password_field_tag :password_confirmation %>
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation %>
   </div>
 
   <div>
-    <%= submit_tag "Register" %>
+    <%= f.submit "Register" %>
   </div>
-
-
+<% end %>

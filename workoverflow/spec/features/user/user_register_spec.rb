@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Admin browsing" do
+describe "User browsing" do
   context "on register page" do
     it "has a sweet header" do
       pending

@@ -1,14 +1,11 @@
-class AdminsController < ApplicationController
-  def index
-    @user = User.new
-  end
+class UsersController < ApplicationController
 
   def new
     @user = User.new
   end
 
   def create
-    @user = User.new(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
+    @user = User.new(name: params[:user][:name], email: params[:user][:email], password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
     if @user.save
       redirect_to login_form_path
     else
@@ -29,9 +26,13 @@ class AdminsController < ApplicationController
     end
   end
 
-  def signout
+  def show
+    @user = User.find(session[:user_id])
+  end
+
+  def logout
     session.clear
-    redirect_to '/'
+    redirect_to projects_path
   end
 
 end
