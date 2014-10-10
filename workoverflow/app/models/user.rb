@@ -5,9 +5,8 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :votes
 
-  validates :name, presence: true
-  validates :email, presence: true
-  validates :password_digest, presence: true
+  validates :name, presence: true, :length => {:minimum => 2}
+  validates :email, presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/, on: :create }
   validates :password, :length => {:minimum => 5}
 
   has_secure_password

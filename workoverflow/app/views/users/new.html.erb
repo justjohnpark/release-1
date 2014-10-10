@@ -1,3 +1,7 @@
+<div id="home">
+    <%= link_to "Home", root_path %>
+</div>
+
 <h1>Register</h1>
 
 <%= form_for @user do |f| %>
@@ -33,7 +37,7 @@
     <%= f.password_field :password_confirmation %>
   </div>
 
-  <div>
+  <div><br>
     <%= f.submit "Register" %>
   </div>
 <% end %>
