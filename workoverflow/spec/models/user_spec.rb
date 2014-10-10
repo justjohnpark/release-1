@@ -28,4 +28,29 @@ describe User do
   it "should have a created_at column" do
     expect(user).to have_db_column :created_at
   end
+
+  it "name cannot be blank" do
+    user = User.create(:name => "")
+    expect(user.errors[:name][0]).to eq("can't be blank")
+  end
+
+  it "name cannot be blank" do
+    user = User.create(:name => "a")
+    expect(user.errors[:name][0]).to eq("is too short (minimum is 2 characters)")
+  end
+
+  it "should require a valid email" do
+    user = User.create(:email => "susan@")
+    expect(user.errors[:email][0]).to eq("is invalid")
+  end
+
+  it "should require a valid password" do
+    user = User.create(:password => "susa")
+    expect(user.errors[:password][0]).to eq("is too short (minimum is 5 characters)")
+  end
+
+  it "should require a valid password" do
+    user = User.create(:password => "susa")
+    expect(user.errors[:password][0]).to eq("is too short (minimum is 5 characters)")
+  end
 end
