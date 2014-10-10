@@ -17,10 +17,6 @@ describe "User browsing" do
       fill_in 'password', with: "freedom"
 
       click_on('Login')
-
-      # expect(page).to have_content("Errors")
-      # expect(session[:id]).to be(user_id)
-      # pending
     end
 
     it "has an input field for email" do

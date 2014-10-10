@@ -10,17 +10,23 @@ describe UsersController do
   end
 
   it "has an login action" do
-    # pending
-    #this is not working
-    # post :create, id: user.id
+    post :login, {email: user.email, password: user.password}
+
+    project = Project.create!(title: "Testing with RSpec", description: "Testing with the latest and greatest. I want to learn with friends", category: "Testing", location: "Chicago", remote: false, time_estimation: 5, creator_id: 1)
+
+    expect(response).to redirect_to(admins_projects_path)
   end
 
   it "has an logout action" do
-    pending
+    post :logout
+
+    expect(response).to redirect_to(projects_path)
   end
 
   it "has a create action for creating a new user" do
-   pending
+    post :create, user: {name: user.name, email: user.email, password: user.password, password_confirmation: user.password_confirmation}
+
+    expect(response).to redirect_to(login_form_path)
   end
 
   it "has a new action for register view" do
