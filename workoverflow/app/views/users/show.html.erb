@@ -1,12 +1,20 @@
+<%= render "layouts/admins_header" %>
+
 <h1><%= @user.name %>'s Profile Page</h1>
+
+<%= link_to "Create a Project", new_project_path %>
 
 <h3>Projects</h3>
 <% @user.projects.each do |project| %>
-  <%= project.title %>
+  <tr>
+    <td><%= link_to project.title, admins_project_path(project) %></td>
+  </tr>
 <% end %>
 
 <h3>Commitments</h3>
 <% @user.commitments.each do |commitment| %>
+  <tr>
   <% project = Project.find(commitment.project_id) %>
-  <%= project.title %>
+    <td><%= link_to project.title, admins_project_path(project) %></td>
+  </tr>
 <% end %>

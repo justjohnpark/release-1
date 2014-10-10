@@ -10,37 +10,59 @@ describe "Admin viewing" do
       @project2 = Project.create!(title: "AJAXifying Stuff", description: "Learning how to make things way fresh.", category: "Javascript", location: "San Francisco", remote: true, time_estimation: 7, creator_id: @user2.id)
       Commitment.create!(user_id: @user1.id, project_id: @project2.id)
       Commitment.create!(user_id: @user2.id, project_id: @project1.id)
+
+      visit login_form_path
+      fill_in "email", with: @user1.email
+      fill_in "password", with: @user1.password
+      click_button 'Login'
+
+      visit user_path(@user1)
     end
 
     it "sees a list of all their projects" do
-      # login(@user)
-      visit user_path(@user1)
       expect(page).to have_content @project1.title
     end
 
     it "sees a list of all their commitments" do
-      visit user_path(@user1)
-      expect(page).to have_content @project2
+      expect(page).to have_content @project2.title
     end
 
     it "can link to individual projects" do
-      pending
+      click_link @project1.title
+
+      expect(page).to have_content @project1.description
+
+    it "can link to individual commitment" do
+      click_link @project2.title
+
+      expect(page).to have_content @project2.description
     end
 
     it "click a link to 'create a project'" do
-      pending
+      click_link "Create a Project"
+
+      expect(page).to have_content "Create a Project"
     end
 
     it "has a link to home" do
-      pending
+      click_link "Home"
+
+      expect(page).to have_content "Current Projects"
+      expect(page).to have_content "Logout"
     end
 
     it "has a link to logout" do
-      pending
+      click_link "Logout"
+
+      expect(page).to have_content "Current Projects"
+      expect(page).to have_content "Sign in"
+      expect(page).to have_content "Register"
     end
 
     it "has a sweet effin header" do
-      pending
+      expect(page).to have_content "Home"
+      expect(page).to have_content "Profile"
+      expect(page).to have_content "Logout"
     end
   end
 end

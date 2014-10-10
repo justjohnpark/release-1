@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    # show_door
+    show_door
     @user = User.find(params[:id])
   end
 
