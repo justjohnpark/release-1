@@ -1,1 +1,12 @@
 <h1><%= @user.name %>'s Profile Page</h1>
+
+<h3>Projects</h3>
+<% @user.projects.each do |project| %>
+  <%= project.title %>
+<% end %>
+
+<h3>Commitments</h3>
+<% @user.commitments.each do |commitment| %>
+  <% project = Project.find(commitment.project_id) %>
+  <%= project.title %>
+<% end %>
