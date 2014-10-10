@@ -35,10 +35,6 @@ class ProjectsController < ApplicationController
   end
 
   def remote_check(number)
-    if number == "1"
-      return true
-    else
-      return false
-    end
+    number == "1"
   end
 end
