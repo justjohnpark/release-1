@@ -31,6 +31,7 @@ describe "Admin viewing" do
       click_link @project1.title
 
       expect(page).to have_content @project1.description
+    end
 
     it "can link to individual commitment" do
       click_link @project2.title

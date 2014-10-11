@@ -31,9 +31,25 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def edit
+    show_door unless current_user
+    @project = Project.find(params[:id])
+  end
+
+  def update
+    @project = Project.find(params[:id])
+    @project.update(project_params)
+    if @project.save
+      redirect_to admins_projects_path
+    else
+      render 'edit'
+    end
+  end
+
     private
 
   def project_params
     params.require(:project).permit(:title, :category, :location, :remote, :time_estimation, :description)
   end
+
 end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Admin browsing" do
-  context "on new project page" do
+  context "on edit project page" do
 
      before(:each) do
       @user = User.create!(name: "Bob Swinsong", email: "bob@gmail.com", password: "12345", password_confirmation: "12345")
@@ -11,7 +11,7 @@ describe "Admin browsing" do
       fill_in "password", with: @user.password
       click_button 'Login'
 
-      visit new_project_path
+      visit edit_project_path(@project)
       fill_in "Title", with: @project.title
       fill_in "Category", with: @project.category
       fill_in "Location", with: @project.location
@@ -26,7 +26,7 @@ describe "Admin browsing" do
     end
 
     it "has a submit button" do
-      click_button "Create Project"
+      click_button "Update Project"
       expect(page).to have_content "Current Project"
     end
 

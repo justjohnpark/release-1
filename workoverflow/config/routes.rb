@@ -1,6 +1,6 @@
 Workoverflow::Application.routes.draw do
   root 'projects#index'
-  resources :projects, only: [:index, :show, :new, :edit, :create]
+  resources :projects, only: [:index, :show, :new, :edit, :create, :update]
 
   resource :admins, only: [] do
     resources :projects do
