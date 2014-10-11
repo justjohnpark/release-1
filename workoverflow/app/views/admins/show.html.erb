@@ -2,7 +2,7 @@
 
 <%= link_to "Create a Project", new_project_path %> <br><br>
 
-<%= link_to "Thumbs UP", project_vote_path %>
+<%= button_to "Thumbs UP", project_vote_path, method: :post, class: "vote-project", remote: true %>
 <h1><%= @project.title %> - <%= @project.votes.length %> Votes</h1>
 <%= @project.description %><br><br>
 <% @project.comments.each do |comment| %>

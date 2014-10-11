@@ -39,6 +39,12 @@ describe "Admin browsing" do
       expect(page).to have_content("Thumbs UP")
     end
 
+    it "sees number of votes for the project" do
+      visit admins_project_path(@project)
+
+      expect(page).to have_content(@project.votes.length)
+    end
+
     it "sees the comments" do
       visit admins_project_path(@project)
 
