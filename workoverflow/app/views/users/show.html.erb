@@ -8,6 +8,7 @@
 <% @user.projects.each do |project| %>
   <tr>
     <td><%= link_to project.title, admins_project_path(project) %></td>
+    <td><%= link_to "Edit Project", edit_project_path(project) %></td><br>
   </tr>
 <% end %>
 
