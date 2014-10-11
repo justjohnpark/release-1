@@ -19,7 +19,14 @@
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-    redirect_to user_path(session[:user_id])
+    respond_to do |format|
+      format.js do
+        render nothing: true
+      end
+      format.any do
+        redirect_to user_path(session[:user_id])
+      end
+    end
   end
 
   def new
