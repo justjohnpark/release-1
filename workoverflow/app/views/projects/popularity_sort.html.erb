@@ -1,0 +1,4 @@
+<h3>Popularity</h3>
+<% @projects.each do |project| %>
+  <%= link_to project.title, project_path(project) %> (<%= project.category %>) - <%= project.votes.length %> Votes<br><br>
+<% end %>

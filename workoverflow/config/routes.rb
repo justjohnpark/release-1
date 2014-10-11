@@ -20,6 +20,12 @@ Workoverflow::Application.routes.draw do
 
   post "/comments/:id/votes/new",     to: "votes#comment_create",            as: "comment_vote"
   post "/projects/:id/votes/new",     to: "votes#project_create",            as: "project_vote"
+
+  get "/sort/popularity",             to: "projects#popularity_sort",        as: "popularity_sort"
+  get "/sort/category",               to: "projects#category_sort",          as: "category_sort"
+  get "/sort/location",               to: "projects#location_sort",          as: "location_sort"
+  get "/sort/remote",                 to: "projects#remote_sort",            as: "remote_sort"
+  get "/sort/recent",                 to: "projects#recent_sort",            as: "recent_sort"
 end
 
 
