@@ -1,10 +1,16 @@
 <%= render 'layouts/admins_header' %><br>
 
-<%= link_to "Edit Project", edit_project_path(@project) %> <br>
+<%= link_to "Create a Project", new_project_path %> <br><br>
 
+<%= button_to "Thumbs UP", project_vote_path, method: :post, class: "vote-project", remote: true %>
 <h1><%= @project.title %> - <%= @project.votes.length %> Votes</h1>
 <%= @project.description %><br><br>
 <% @project.comments.each do |comment| %>
-<%= comment.content %><br>
-<%= comment.user.name %>
+  <%= comment.content %><br>
+  <%= comment.user.name %><br>
+  <% if comment.user.id == @user.id %>
+    <%= link_to "Delete", admins_project_comment_path(@project, comment), method: :delete, confirm: "Are you sure?" %>
+  <% end %><br><br>
 <% end %>
+
+<%= render 'layouts/comment_form' %>

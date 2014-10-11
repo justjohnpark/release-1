@@ -1,6 +1,8 @@
 require 'spec_helper'
 
-describe VotesController do
+describe "Admin browsing" do
+  context "on project page's comment form" do
+
     before(:each) do
       @user = User.create!(name: "Bob Swinsong", email: "bob@gmail.com", password: "12345", password_confirmation: "12345")
       @project = Project.create!(title: "Testing with RSpec", description: "Testing with the latest and greatest. I want to learn with friends", category: "Testing", location: "Chicago", remote: false, time_estimation: 5, creator_id: @user.id)
@@ -17,13 +19,18 @@ describe VotesController do
       click_button 'Login'
 
       visit user_path(@user)
-  end
+    end
 
-  it "has a new comment_create action for voting on a comment" do
-    pending
-  end
+    it "should have field for project title" do
+      visit admins_project_path(@project)
 
-  it "has a new project_create action for voting on a project" do
-    pending
+      expect(page).to have_button("Comment!")
+    end
+
+    it "should have a text field" do
+      visit admins_project_path(@project)
+
+      expect(page).to have_selector("[name='comment[content]']")
+    end
   end
 end
