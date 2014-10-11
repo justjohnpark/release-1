@@ -5,17 +5,31 @@
 <%= link_to "Create a Project", new_project_path %>
 
 <h3>Projects</h3>
-<% @user.projects.each do |project| %>
+<table>
   <tr>
-    <td><%= link_to project.title, admins_project_path(project) %></td>
-    <td><%= link_to "Edit Project", edit_project_path(project) %></td><br>
+    <td>Project Title</td>
   </tr>
+
+<% if @user.projects %>
+  <% @user.projects.each do |project| %>
+    <tr>
+      <td><%= link_to project.title, admins_project_path(project) %></td>
+      <td><%= link_to "Edit Project", edit_project_path(project) %></td>
+      <td><%= link_to 'Destroy', project_path(project), method: :delete, :remote => true, :class => "project" %></td>
+    </tr>
+  <% end %>
 <% end %>
+</table>
 
 <h3>Commitments</h3>
-<% @user.commitments.each do |commitment| %>
+<table>
   <tr>
-  <% project = Project.find(commitment.project_id) %>
+    <td>Project Title</td>
+  </tr>
+  <% @user.commitments.each do |commitment| %>
+  <tr>
+    <% project = Project.find(commitment.project_id) %>
     <td><%= link_to project.title, admins_project_path(project) %></td>
   </tr>
-<% end %>
+  <% end %>
+<table>
