@@ -1,12 +1,9 @@
 $(function(){
   console.log("page loaded")
-  $("a[data-remote=true].vote-project").on("ajax:success", function(event, data){
-    console.log(event.target)
-    console.log(data)
-
-
+  $("form[data-remote=true]").on("ajax:success", function(event, data, status, xhr){
+    console.log(data.count);
+    $("span.vote-visual").html(data.count)
   })
-
 })
 
 
