@@ -15,7 +15,7 @@
     <tr>
       <td><%= link_to project.title, admins_project_path(project) %></td>
       <td><%= link_to "Edit Project", edit_project_path(project) %></td>
-      <td><%= link_to 'Destroy', project_path(project), method: :delete, :remote => true, :class => "project" %></td>
+      <td><%= link_to "Destroy", project_path(project), method: :delete, :remote => true, :class => "project_delete" %></td>
     </tr>
   <% end %>
 <% end %>
