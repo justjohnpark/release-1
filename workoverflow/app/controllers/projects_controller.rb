@@ -53,29 +53,16 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def category_sort
-    @projects = Project.category_hash
-    respond_to do |format|
-      format.html { render :layout => false }
-    end
-  end
-
-  def location_sort
-    @projects = Project.location_hash
-    respond_to do |format|
-      format.html { render :layout => false }
-    end
-  end
-
-  def remote_sort
-    @projects = Project.remote_hash
-    respond_to do |format|
-      format.html { render :layout => false }
-    end
-  end
-
   def recent_sort
     @projects = Project.all
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+
+  def sort
+    @sort = params[:sort]
+    @projects = Project.sort_hash(@sort)
     respond_to do |format|
       format.html { render :layout => false }
     end

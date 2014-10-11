@@ -15,34 +15,14 @@ class Project < ActiveRecord::Base
                             select('projects.id, projects.title, projects.category').
                             group('projects.id')
 
-  def self.category_hash
-    category_array = [] 
+  def self.sort_hash(sort_type)
+    sort_array = [] 
     projects = Project.all
+    projects = projects.reverse if sort_type == "created_at"
     projects.each do |project|
-      category_array << project.category
+      sort_array << project.send(sort_type)
     end
 
-    Hash[projects.zip category_array].group_by { |k, v| v }
+    Hash[projects.zip sort_array].group_by { |k, v| v }
   end
-
-  def self.location_hash
-    location_array = [] 
-    projects = Project.all 
-    projects.each do |project|
-      location_array << project.location
-    end
-
-    Hash[projects.zip location_array].group_by { |k, v| v }
-  end
-
-  def self.remote_hash
-    remote_array = [] 
-    projects = Project.all 
-    projects.each do |project|
-      remote_array << project.remote.to_s
-    end
-
-    Hash[projects.zip remote_array].group_by { |k, v| v }
-  end
-
 end
