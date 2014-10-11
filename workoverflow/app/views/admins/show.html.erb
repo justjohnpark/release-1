@@ -1,18 +1,24 @@
 <%= render 'layouts/admins_header' %><br>
 
-<<<<<<< HEAD
 <%= link_to "Create a Project", new_project_path %> <br><br>
+<div class="project-vote-block">
+<%= button_to "Thumbs UP", project_vote_path + '.json', "data-type" => :json, method: :post, class: "vote-project", remote: true %>
+</div>
 
-<%= button_to "Thumbs UP", project_vote_path, method: :post, class: "vote-project", remote: true %>
-=======
->>>>>>> create-and-edit
-<h1><%= @project.title %> - <%= @project.votes.length %> Votes</h1>
+<h1><%= @project.title %> - <span class="vote-visual"><%= @project.votes.length %> </span> Votes</h1>
 <%= @project.description %><br><br>
-<% @project.comments.each do |comment| %>
+<% @project.comments.each_with_index do |comment, index| %>
+<div class="comment-block">
   <%= comment.content %><br>
   <%= comment.user.name %><br>
   <% if comment.user.id == @user.id %>
-    <%= link_to "Delete", admins_project_comment_path(@project, comment), method: :delete, confirm: "Are you sure?" %>
+
+  <span class="vote-visual-comment" id="<%= index %>">  <%= comment.votes.length %>  </span>
+
+  <%= button_to "Like Comment", comment_vote_path(comment) + '.json', "data-type" => :json, method: :post, class: "comment-project", remote: true %>
+
+  <%= link_to "Delete", admins_project_comment_path(@project, comment), method: :delete, confirm: "Are you sure?" %>
+</div>
   <% end %><br><br>
 <% end %>
 
