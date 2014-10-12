@@ -5,7 +5,8 @@ $(function(){
   });
 
   $(".project-vote-block form").on("ajax:success", function(event, data, status, xhr){
-    $("span.vote-visual").html(data.count);
+    var $clicked = $(this);
+    $clicked.siblings("span.vote-visual").html(data.count);
   });
 
 })
