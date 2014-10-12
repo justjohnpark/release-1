@@ -11,12 +11,6 @@ class Project < ActiveRecord::Base
   validates :location, presence: true
   validates :time_estimation, presence: true
 
-  scope :popularity_sort, 
-          select('projects.id, projects.title, projects.category, count(votes.id) AS votes_count').
-          joins(:votes).
-          group('projects.id').
-          order('votes_count DESC')
-
   def self.sort_hash(sort_type)
     sort_array = [] 
     projects = Project.all
@@ -26,5 +20,9 @@ class Project < ActiveRecord::Base
     end
 
     Hash[projects.zip sort_array].group_by { |k, v| v }
+  end
+
+  def self.popularity_sort
+    Project.all.sort_by { |project| project.votes.count }.reverse
   end
 end
