@@ -67,12 +67,12 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @comment = Comment.new
-    @user = User.find_by_id(session[:user_id])
+    @user = User.find_by_id(@project.creator.id)
     render 'admins/show' if logged_in?
   end
 
   def edit
-    show_door unless current_user
+    show_door
     @project = Project.find(params[:id])
   end
 
@@ -83,33 +83,6 @@ class ProjectsController < ApplicationController
       redirect_to admins_projects_path
     else
       render 'edit'
-    end
-  end
-
-
-  def destroy
-    @project = Project.find(params[:id])
-    @project.destroy
-    respond_to do |format|
-      format.js do
-        render nothing: true
-      end
-      format.any do
-        redirect_to user_path(session[:user_id])
-      end
-    end
-  end
-
-  def destroy
-    @project = Project.find(params[:id])
-    @project.destroy
-    respond_to do |format|
-      format.js do
-        render nothing: true
-      end
-      format.any do
-        redirect_to user_path(session[:user_id])
-      end
     end
   end
 

@@ -2,7 +2,12 @@
 
 <h1><%= @user.name %>'s Profile Page</h1>
 
-<%= link_to "Create a Project", new_project_path %>
+<% if session[:user_id] == @user.id %>
+  <%= link_to "Create a Project", new_project_path %>
+<% end %>
+
+<h5>Contact Info: <%= @user.email %></h5>
+
 
 <h3>Projects</h3>
 <table>
@@ -14,8 +19,10 @@
   <% @user.projects.each do |project| %>
     <tr>
       <td><%= link_to project.title, admins_project_path(project) %></td>
-      <td><%= link_to "Edit Project", edit_project_path(project) %></td>
-      <td><%= link_to "Destroy", project_path(project), method: :delete, :remote => true, :class => "project_delete" %></td>
+      <% if session[:user_id] == @user.id %>
+        <td><%= link_to "Edit Project", edit_project_path(project) %></td>
+        <td><%= link_to "Destroy", project_path(project), method: :delete, :remote => true, :class => "project_delete" %></td>
+      <% end %>
     </tr>
   <% end %>
 <% end %>
@@ -30,7 +37,9 @@
   <tr>
     <% project = Project.find(commitment.project_id) %>
     <td><%= link_to project.title, admins_project_path(project) %></td>
+    <% if session[:user_id] == @user.id %>
     <td><%= link_to "Uncommit", uncommit_path(project), method: :post, :remote => true, :class => "project_uncommit"  %></td>
+    <% end %>
   </tr>
   <% end %>
 <table>

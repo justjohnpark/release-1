@@ -1,5 +1,9 @@
 <%= render 'layouts/admins_header' %><br>
 
+<% if flash[:error] %>
+  <%= flash[:error] %>
+<% end %>
+
 <%= link_to "Create a Project", new_project_path %> <br><br>
 <%= link_to "Commit to This Project", commit_path(@project), method: :post, :remote => true, :class => "project_commit" %> <br><br>
 
@@ -8,12 +12,14 @@
 <h1><%= @project.title %> </h1>
 Votes <span class="vote-visual"><%= @project.votes.length %> </span>
 <%= button_to "Thumbs UP", project_vote_path + '.json', "data-type" => :json, method: :post, class: "vote-project", remote: true %>
-
+Creator: <%= link_to @project.creator.name, user_path(@project.creator) %>
 <br>
 Decription:
-<%= @project.description %><br><br>
+<%= @project.description %><br>
+Current Team: <% @project.collaborators.each do |collaborator| %>
+  <%= link_to collaborator.name, user_path(collaborator) %> ||
+<% end %>
 </div>
-
 
 <div class="new-comment-block">
 	<%= render 'layouts/comment_form' %>
