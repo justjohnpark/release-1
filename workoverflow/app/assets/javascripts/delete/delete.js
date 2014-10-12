@@ -4,7 +4,7 @@ $(function() {
     listItem.remove();
   });
 
-  $(".comment_delete").on("ajax:success", function(e) {
+  $("#comment-placement").on("ajax:success", ".comment_delete", function(e) {
     var listItem = $(e.target).parent();
     listItem.remove();
   });

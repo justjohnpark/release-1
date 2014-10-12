@@ -1,5 +1,5 @@
 $(function(){
-  $(".comment-block form").on("ajax:success", function(event, data, status, xhr){
+  $("#comment-placement").on("ajax:success", ".comment-block form", function(event, data, status, xhr){
     var $clicked = $(this);
     $clicked.siblings('span.vote-visual-comment').html(data.count);
   });
