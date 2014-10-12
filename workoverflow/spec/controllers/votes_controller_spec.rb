@@ -20,7 +20,8 @@ describe VotesController do
   end
 
   it "has a new comment_create action for voting on a comment" do
-    pending
+      pending
+
   end
 
   it "has a new project_create action for voting on a project" do
