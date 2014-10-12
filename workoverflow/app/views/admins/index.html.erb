@@ -4,5 +4,10 @@
 <div>
   <% @projects.each do |project| %>
     <%= link_to project.title, project_path(project) %> <br>
+  <div class="project-vote-block">
+    <%= button_to "Thumbs UP", project_vote_path(project) + '.json', "data-type" => :json, method: :post, class: "vote-project", remote: true %>
+    <span class="vote-visual"><%= project.votes.length %> </span> Votes</h1>
+  </div>
+  <br><br>
   <% end %>
 </div>
