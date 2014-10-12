@@ -9,13 +9,9 @@
 <%= @project.description %><br><br>
 
 <div class="new-comment-block">
-<%= render 'layouts/comment_form' %>
+	<%= render 'layouts/comment_form' %>
 </div><br><br>
 
-  <div id="comment-placement"></div>
-
-      <%= render partial: "layouts/comment", locals:{project: @project} %>
-
-  </div>
-
-
+<div id="comment-placement"></div>
+  <%= render partial: "layouts/comment", locals:{project: @project} %>
+</div>
