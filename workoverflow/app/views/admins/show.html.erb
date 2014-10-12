@@ -4,16 +4,21 @@
 <%= link_to "Commit to This Project", commit_path(@project), method: :post, :remote => true, :class => "project_commit" %> <br><br>
 
 <div class="project-vote-block">
+
+<h1><%= @project.title %> </h1>
+Votes <span class="vote-visual"><%= @project.votes.length %> </span>
 <%= button_to "Thumbs UP", project_vote_path + '.json', "data-type" => :json, method: :post, class: "vote-project", remote: true %>
+
+<br>
+Decription:
+<%= @project.description %><br><br>
 </div>
 
-<h1><%= @project.title %> - <span class="vote-visual"><%= @project.votes.length %> </span> Votes</h1>
-<%= @project.description %><br><br>
 
 <div class="new-comment-block">
 	<%= render 'layouts/comment_form' %>
 </div><br><br>
 
-<div id="comment-placement"></div>
+<div id="comment-placement">
   <%= render partial: "layouts/comment", locals:{project: @project} %>
 </div>
