@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
   has_many :collaborators, through: :commitments, source: :user
   has_many :votes, as: :voteable
 
+  validates :creator, presence: true
   validates :title, presence: true
   validates :description, presence: true
   validates :category, presence: true
@@ -12,7 +13,7 @@ class Project < ActiveRecord::Base
   validates :time_estimation, presence: true
 
   def self.sort_hash(sort_type)
-    sort_array = [] 
+    sort_array = []
     projects = Project.all
     projects = projects.reverse if sort_type == "created_at"
     projects.each do |project|

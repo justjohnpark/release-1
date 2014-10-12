@@ -5,10 +5,10 @@ class CreateVotes < ActiveRecord::Migration
       t.integer :voteable_id
       t.string :voteable_type
 
-      add_index :votes, :voteable_id
-      add_index :votes, :voteable_type
+      # add_index :votes, [:voteable_id, :voteable_type]
 
       t.timestamps
     end
   end
 end
+

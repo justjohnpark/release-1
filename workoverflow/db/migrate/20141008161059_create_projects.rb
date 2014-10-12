@@ -7,9 +7,9 @@ class CreateProjects < ActiveRecord::Migration
       t.string :location
       t.boolean :remote
       t.integer :time_estimation
-      t.integer :creator_id
+      t.references :creator, index: true
 
-      add_index :projects, :creator_id
+      # add_index :projects, :creator_id
 
       t.timestamps
     end
