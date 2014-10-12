@@ -17,9 +17,10 @@ class UsersController < ApplicationController
   end
 
   def login
+    p params
+    puts "-------------------TEST-----------------------------"
     @user = User.find_by_email(params[:email])
-    if @user
-      @user.authenticate(params[:password])
+    if @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect_to admins_projects_path
     else
