@@ -9,9 +9,23 @@
   def create
     @project = Project.new(project_params)
     if @project.save
+      @project.update(creator_id: session[:user_id])
       redirect_to admins_projects_path
     else
       render 'new'
+    end
+  end
+
+  def destroy
+    @project = Project.find(params[:id])
+    @project.destroy
+    respond_to do |format|
+      format.js do
+        render nothing: true
+      end
+      format.any do
+        redirect_to user_path(session[:user_id])
+      end
     end
   end
 
