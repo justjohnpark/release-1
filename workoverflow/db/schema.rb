@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 20141008162326) do
     t.datetime "updated_at"
   end
 
+  add_index "comments", ["project_id"], name: "index_comments_on_project_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
   create_table "commitments", force: true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
@@ -44,6 +47,8 @@ ActiveRecord::Schema.define(version: 20141008162326) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "projects", ["creator_id"], name: "index_projects_on_creator_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
