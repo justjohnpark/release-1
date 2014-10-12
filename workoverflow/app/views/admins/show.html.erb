@@ -19,7 +19,7 @@
 					<%= button_to "+1", project_vote_path + '.json', "data-type" => :json, method: :post, class: "vote-project", remote: true %>
 				</div>
 				<h2 class="section-heading"><%= @project.title %></h2>
-				<h3 class="section-subheading text-muted"><%= link_to "Commit to This Project", commit_path(@project), method: :post, :remote => true, :class => "project_commit" %></h3>
+				<h3 class="section-subheading text-muted" id="commit-link"><%= link_to "Commit to This Project", commit_path(@project), method: :post, :remote => true, :class => "project_commit" %></h3>
 			</div>
 		</div>
 		<div class="row">

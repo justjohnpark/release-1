@@ -42,12 +42,14 @@
       <% @user.commitments.each do |commitment| %>
       <% project = Project.find(commitment.project_id) %>
       <div class="col-md-4">
-        <h4 class="service-heading"><%= link_to project.title, admins_project_path(project) %>
-        <% if session[:user_id] == @user.id %>
-        - <%= link_to "Uncommit", uncommit_path(project), method: :post, :remote => true, :class => "project_uncommit"  %>
-        <% end %>
-        </h4>
-        <p class="text-muted"><%= project.description %></p>
+        <div id="commitment">
+          <h4 class="service-heading"><%= link_to project.title, admins_project_path(project) %>
+          <% if session[:user_id] == @user.id %>
+          - <%= link_to "Uncommit", uncommit_path(project), method: :post, :remote => true, :class => "project_uncommit"  %>
+          <% end %>
+          </h4>
+          <p class="text-muted"><%= project.description %></p>
+        </div>
       </div>
       <% end %>
     </div>
