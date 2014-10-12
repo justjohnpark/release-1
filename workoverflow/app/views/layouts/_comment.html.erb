@@ -4,10 +4,10 @@
     <%= comment.user.name %><br>
       <span class="vote-visual-comment" id="<%= index %>">  <%= comment.votes.length %>  </span>
       <% if comment.user.id != @user.id %>
-        <%= button_to "Like Comment", comment_vote_path(comment) + '.json', "data-type" => :json, method: :post, class: "comment-project", remote: true %>
+        <%= button_to "+1", comment_vote_path(comment) + '.json', "data-type" => :json, method: :post, class: "comment-project", remote: true %>
       <% end %>
 
-    <% if comment.user.id == @user.id %>
+    <% if comment.user.id == session[:user_id] %>
       <%= link_to "Delete", admins_project_comment_path(project, comment), method: :delete, remote: true, class: "comment_delete" %>
      <% end %>
   <br><br>

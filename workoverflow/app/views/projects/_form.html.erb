@@ -1,4 +1,4 @@
-<%= form_for @project do |f| %>
+<%= form_for @project, html: { role: "form" } do |f| %>
   <% if @project.errors.any? %>
   <div id="errors_explanation">
     <h2><%= pluralize(@project.errors.count, "error") %>
@@ -11,37 +11,30 @@
   </div>
   <% end %>
 
-  <div>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  <div class="form-group">
+    <%= f.text_field :title, class: "form-control", placeholder: "Enter the project's title" %>
   </div>
 
-  <div>
-    <%= f.label :category %><br>
-    <%= f.text_field :category %>
+  <div class="form-group">
+    <%= f.text_field :category, class: "form-control", placeholder: "Enter the project's category" %>
   </div>
 
-  <div>
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
+  <div class="form-group">
+    <%= f.text_field :location, class: "form-control", placeholder: "Enter the project's location" %>
   </div>
 
-  <div>
-    <%= f.label :time_estimation %><br>
-    <%= f.text_field :time_estimation %>
+  <div class="form-group">
+    <%= f.text_field :time_estimation, class: "form-control", placeholder: "Enter the project's time estimation in days" %>
   </div>
 
-  <div>
-    <%= f.check_box :remote %>
+  <div class="form-group checkbox">
     <%= f.label(:remote, "Work Remotely?") %>
+    <%= f.check_box :remote, class: "form-control" %>
+  </div><br>
+
+   <div class="form-group">
+    <%= f.text_area :description, class: "form-control", placeholder: "Enter the project's description" %>
   </div>
 
-  <div>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-
-  <div>
-    <%= f.submit %>
-  </div>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
 <% end %>
