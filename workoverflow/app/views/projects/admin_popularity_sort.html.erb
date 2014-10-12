@@ -1,0 +1,9 @@
+<h3>Popularity</h3>
+<% @projects.each do |project| %>
+  <%= link_to project.title, project_path(project) %> (<%= project.category %>)
+  <div class="project-vote-block">
+    	<span class="vote-visual"><%= project.votes.length %></span> Votes</h1>
+    	<%= button_to "+1", project_vote_path(project) + '.json', "data-type" => :json, method: :post, class: "vote-project", remote: true %>
+  	</div>
+  	<br>
+<% end %>
