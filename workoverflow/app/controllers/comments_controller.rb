@@ -12,7 +12,13 @@ class CommentsController < ApplicationController
   def destroy
     project = Project.find_by_id(params[:project_id])
     project.comments.destroy(params[:id])
-
-    redirect_to admins_project_path(project)
+    respond_to do |format|
+      format.js do
+        render nothing: true
+      end
+      format.any do
+        redirect_to admins_project_path(project)
+      end
+    end
   end
 end

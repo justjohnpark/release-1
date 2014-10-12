@@ -10,4 +10,19 @@ class Project < ActiveRecord::Base
   validates :category, presence: true
   validates :location, presence: true
   validates :time_estimation, presence: true
+
+  scope :popularity_sort, joins(:votes).
+                            select('projects.id, projects.title, projects.category').
+                            group('projects.id')
+
+  def self.sort_hash(sort_type)
+    sort_array = [] 
+    projects = Project.all
+    projects = projects.reverse if sort_type == "created_at"
+    projects.each do |project|
+      sort_array << project.send(sort_type)
+    end
+
+    Hash[projects.zip sort_array].group_by { |k, v| v }
+  end
 end

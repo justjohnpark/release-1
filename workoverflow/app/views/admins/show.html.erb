@@ -24,8 +24,8 @@
     <span class="vote-visual-comment" id="<%= index %>">  <%= comment.votes.length %>  </span>
 
     <%= button_to "Like Comment", comment_vote_path(comment) + '.json', "data-type" => :json, method: :post, class: "comment-project", remote: true %>
+  <%= link_to "Delete", admins_project_comment_path(@project, comment), method: :delete, :remote => true, :class => "comment_delete" %>
+</div>
 
-    <%= link_to "Delete", admins_project_comment_path(@project, comment), method: :delete, confirm: "Are you sure?" %>
-  </div>
   <% end %><br><br>
 <% end %>
