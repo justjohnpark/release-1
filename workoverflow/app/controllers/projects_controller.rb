@@ -29,6 +29,7 @@ class ProjectsController < ApplicationController
     if logged_in?
       render 'admins/show'
     end
+
   end
 
   def edit
@@ -45,6 +46,19 @@ class ProjectsController < ApplicationController
       render 'edit'
     end
   end
+
+   def destroy
+    @project = Project.find(params[:id])
+    @project.destroy
+    respond_to do |format|
+      format.js do
+        render nothing: true
+      end
+      format.any do
+        redirect_to user_path(session[:user_id])
+      end
+    end
+   end
 
     private
 
