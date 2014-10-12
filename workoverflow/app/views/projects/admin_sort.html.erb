@@ -1,0 +1,20 @@
+<h3><%= @sort.capitalize %></h3>
+<% @projects.each do |array| %>
+	<% if array[0] == true %>
+		<h4>Yes</h4>
+	<% elsif array[0] == false %>
+		<h4>No</h4>
+	<% elsif @sort == "created_at" %>
+		<%= array[0].strftime("%A, %M %B, %Y @ %l:%M%P") %>
+	<% else %>
+		<h4><%= array[0]  %></h4>
+	<% end %>
+	<% array[1].each do |project| %>
+  	<%= link_to project[0].title, project_path(project[0]) %> (<%= project[0].category %>)
+  	<div class="project-vote-block">
+    	<span class="vote-visual"><%= project[0].votes.length %></span> Votes</h1>
+    	<%= button_to "+1", project_vote_path(project[0]) + '.json', "data-type" => :json, method: :post, class: "vote-project", remote: true %>
+  	</div>
+  	<br>
+  <% end %>
+<% end %>

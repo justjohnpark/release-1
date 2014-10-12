@@ -21,4 +21,6 @@ Workoverflow::Application.routes.draw do
 
   get "/sort",                        to: "projects#sort",                   as: "sort"
   get "/sort/popularity",             to: "projects#popularity_sort",        as: "popularity_sort"
+  get "/admin/sort",                  to: "projects#admin_sort",             as: "admin_sort"
+  get "/admin/sort/popularity",       to: "projects#admin_popularity_sort",  as: "admin_popularity_sort"
 end

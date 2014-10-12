@@ -1,4 +1,4 @@
-  class ProjectsController < ApplicationController
+class ProjectsController < ApplicationController
   def index
     @projects = Project.all
     if logged_in?
@@ -61,19 +61,14 @@
 
   def new
     show_door
-    if logged_in?
-      @project = Project.new
-    end
+    @project = Project.new if logged_in?
   end
 
   def show
     @project = Project.find(params[:id])
     @comment = Comment.new
     @user = User.find_by_id(session[:user_id])
-    if logged_in?
-      render 'admins/show'
-    end
-
+    render 'admins/show' if logged_in?
   end
 
   def edit
@@ -105,17 +100,16 @@
     end
   end
 
-  def popularity_sort
-    @projects = Project.popularity_sort
+  def destroy
+    @project = Project.find(params[:id])
+    @project.destroy
     respond_to do |format|
-      format.html { render :layout => false }
-    end
-  end
-
-  def recent_sort
-    @projects = Project.all
-    respond_to do |format|
-      format.html { render :layout => false }
+      format.js do
+        render nothing: true
+      end
+      format.any do
+        redirect_to user_path(session[:user_id])
+      end
     end
   end
 
@@ -127,23 +121,31 @@
     end
   end
 
-   def destroy
-    @project = Project.find(params[:id])
-    @project.destroy
+  def popularity_sort
+    @projects = Project.popularity_sort
     respond_to do |format|
-      format.js do
-        render nothing: true
-      end
-      format.any do
-        redirect_to user_path(session[:user_id])
-      end
+      format.html { render :layout => false }
     end
-   end
+  end
+
+  def admin_sort
+    @sort = params[:sort]
+    @projects = Project.sort_hash(@sort)
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+
+  def admin_popularity_sort
+    @projects = Project.popularity_sort
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
 
   private
 
   def project_params
     params.require(:project).permit(:title, :category, :location, :remote, :time_estimation, :description)
   end
-
 end

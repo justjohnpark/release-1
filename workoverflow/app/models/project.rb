@@ -11,9 +11,11 @@ class Project < ActiveRecord::Base
   validates :location, presence: true
   validates :time_estimation, presence: true
 
-  scope :popularity_sort, joins(:votes).
-                            select('projects.id, projects.title, projects.category').
-                            group('projects.id')
+  scope :popularity_sort, 
+          select('projects.id, projects.title, projects.category, count(votes.id) AS votes_count').
+          joins(:votes).
+          group('projects.id').
+          order('votes_count DESC')
 
   def self.sort_hash(sort_type)
     sort_array = [] 
