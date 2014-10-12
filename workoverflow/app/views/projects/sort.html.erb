@@ -1,0 +1,15 @@
+<h3><%= @sort.capitalize %></h3>
+<% @projects.each do |array| %>
+	<% if array[0] == true %>
+		<h4>Yes</h4>
+	<% elsif array[0] == false %>
+		<h4>No</h4>
+	<% elsif @sort == "created_at" %>
+		<%= array[0].strftime("%A, %M %B, %Y @ %l:%M%P") %>
+	<% else %>
+		<h4><%= array[0]  %></h4>
+	<% end %>
+	<% array[1].each do |project| %>
+  	<%= link_to project[0].title, project_path(project[0]) %> (<%= project[0].category %>) - <%= project[0].votes.length %> Votes<br>
+  <% end %>
+<% end %>

@@ -60,7 +60,29 @@
     end
   end
 
-    private
+  def popularity_sort
+    @projects = Project.popularity_sort
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+
+  def recent_sort
+    @projects = Project.all
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+
+  def sort
+    @sort = params[:sort]
+    @projects = Project.sort_hash(@sort)
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+
+  private
 
   def project_params
     params.require(:project).permit(:title, :category, :location, :remote, :time_estimation, :description)
