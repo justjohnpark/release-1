@@ -1,11 +1,34 @@
-<div id="home">
-    <%= link_to "Home", root_path %>
-</div>
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header page-scroll">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand page-scroll" href="#page-top">Release 1</a>
+		</div>
 
-<div id="register-link">
-    <%= link_to "Register", new_user_path %>
-</div>
-
-<div id="sign-in">
-    <%= link_to "Sign in", login_path %>
-</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="hidden">
+					<a href="#page-top"></a>
+				</li>
+				<li>
+					<%= link_to "Home", root_path %>
+				</li>
+				<li>	
+					<%= link_to "Register", new_user_path %>
+				</li>
+				<li>
+					<%= link_to "Sign in", login_path %>
+				</li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container-fluid -->
+</nav>
