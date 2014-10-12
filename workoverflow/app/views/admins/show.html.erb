@@ -1,30 +1,117 @@
-<%= render 'layouts/admins_header' %><br>
+<%= render 'layouts/admins_header' %>
 
-<% if flash[:error] %>
-  <%= flash[:error] %>
-<% end %>
+<header>
+	<div class="container">
+		<div class="intro-text">
+			<div class="intro-lead-in"><%= @project.category %></div>
+			<div class="intro-heading"><%= @project.title %></div>
+			<a href="#project-view" class="page-scroll btn btn-xl">See Details</a>
+		</div>
+	</div>
+</header>
 
-<%= link_to "Create a Project", new_project_path %> <br><br>
-<%= link_to "Commit to This Project", commit_path(@project), method: :post, :remote => true, :class => "project_commit" %> <br><br>
+<section id="project-view">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<div class="project-vote-block">
+					Votes <span class="vote-visual"><%= @project.votes.length %> </span>
+					<%= button_to "+1", project_vote_path + '.json', "data-type" => :json, method: :post, class: "vote-project", remote: true %>
+				</div>
+				<h2 class="section-heading"><%= @project.title %></h2>
+				<h3 class="section-subheading text-muted" id="commit-link"><%= link_to "Commit to This Project", commit_path(@project), method: :post, :remote => true, :class => "project_commit" %></h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<ul class="timeline">
+					<li class="timeline-inverted">
+						<div class="timeline-image">
+							<img class="img-circle img-responsive" src="http://upload.wikimedia.org/wikipedia/en/2/28/Railwayworkerswithtietongs.jpg" alt="">
+						</div>
+						<div class="timeline-panel">
+							<div class="timeline-heading">
+								<h4>People</h4>
+							</div>
+							<div class="timeline-body">
+								<h4 class="service-heading">Creator: <%= link_to @project.creator.name, user_path(@project.creator) %></h4>
+								<h3 class="section-subheading text-muted">
+									Current Team: <% @project.collaborators.each do |collaborator| %>
+									<p><%= link_to collaborator.name, user_path(collaborator) %><p>
+									<% end %>
+								</h3>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="timeline-image">
+							<img class="img-circle img-responsive" src="http://img1.wikia.nocookie.net/__cb20130922193540/whatever-you-want/images/3/34/Cool-cat.jpg" alt="">
+						</div>
+						<div class="timeline-panel">
+							<div class="timeline-heading">
+								<h4>Description</h4>
+							</div>
+							<div class="timeline-body">
+								<p class="text-muted"><%= @project.description %></p>
+							</div>
+						</div>
+					</li>
+					<li class="timeline-inverted">
+						<div class="timeline-image">
+							<img class="img-circle img-responsive" src="http://s7.thisnext.com/media/largest_dimension/16BD27D2.jpg" alt="">
+						</div>
+						<div class="timeline-panel">
+							<div class="timeline-heading">
+								<h4>Location</h4>
+							</div>
+							<div class="timeline-body">
+								<p class="text-muted"><%= @project.location %></p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="timeline-image">
+							<img class="img-circle img-responsive" src="http://www.shorefiretech.com/wp-content/uploads/2014/03/remote-circle-picture300x300.png" alt="">
+						</div>
+						<div class="timeline-panel">
+							<div class="timeline-heading">
+								<h4>Remote</h4>
+							</div>
+							<div class="timeline-body">
+								<p class="text-muted"><%= @project.remote %></p>
+							</div>
+						</div>
+					</li>
+					<li class="timeline-inverted">
+						<div class="timeline-image">
+							<img class="img-circle img-responsive" src="http://a.tgcdn.net/images/products/zoom/f34e_victorian_web_pocket_watch.jpg" alt="">
+						</div>
+						<div class="timeline-panel">
+							<div class="timeline-heading">
+								<h4>Time for Project</h4>
+							</div>
+							<div class="timeline-body">
+								<p class="text-muted"><%= @project.time_estimation %> days</p>
+							</div>
+						</div>
+					</li>
+					<li class="timeline-inverted">
+						<div class="timeline-image">
+							<h4>Find
+								<br>work
+								<br>yourself!</h4>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div><br>
 
-<div class="project-vote-block">
+	<div class="new-comment-block">
+		<%= render 'layouts/comment_form' %>
+	</div><br><br>
 
-<h1><%= @project.title %> </h1>
-Votes <span class="vote-visual"><%= @project.votes.length %> </span>
-<%= button_to "Thumbs UP", project_vote_path + '.json', "data-type" => :json, method: :post, class: "vote-project", remote: true %>
-Creator: <%= link_to @project.creator.name, user_path(@project.creator) %>
-<br>
-Decription:
-<%= @project.description %><br>
-Current Team: <% @project.collaborators.each do |collaborator| %>
-  <%= link_to collaborator.name, user_path(collaborator) %> ||
-<% end %>
-</div>
-
-<div class="new-comment-block">
-	<%= render 'layouts/comment_form' %>
-</div><br><br>
-
-<div id="comment-placement">
-  <%= render partial: "layouts/comment", locals:{project: @project} %>
-</div>
+	<div id="comment-placement">
+		<%= render partial: "layouts/comment", locals:{project: @project} %>
+	</div>
+</section>
