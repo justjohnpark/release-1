@@ -1,8 +1,20 @@
 $(function(){
     $(".new-comment-block form").on("ajax:complete", function(event, data, status, xhr){
       $(this).hide();
-      $("div.new-comment-block textarea").val("");
-      $("#comment-placement").html(data.responseText)
-      $(this).show();
+      var pattern = /\S/
+      var content = $("div.new-comment-block textarea").val()
+      var contentRes = pattern.test(content)
+      if (contentRes === false){
+        $(".new-comment-block").prepend("Comment cannot be blank");
+        $("div.new-comment-block textarea").val("");
+        $(this).show();
+      }else{
+        $("div.new-comment-block textarea").val("");
+        $("#comment-placement").html(data.responseText);
+        $(this).show();
+      }
    });
  });
+
+
+
