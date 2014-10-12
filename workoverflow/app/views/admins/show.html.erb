@@ -1,6 +1,8 @@
 <%= render 'layouts/admins_header' %><br>
 
 <%= link_to "Create a Project", new_project_path %> <br><br>
+<%= link_to "Commit to This Project", commit_path(@project), method: :post, :remote => true, :class => "project_commit" %> <br><br>
+
 <div class="project-vote-block">
 <%= button_to "Thumbs UP", project_vote_path + '.json', "data-type" => :json, method: :post, class: "vote-project", remote: true %>
 </div>

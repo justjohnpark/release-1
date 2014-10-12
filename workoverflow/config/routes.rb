@@ -1,6 +1,8 @@
 Workoverflow::Application.routes.draw do
   root 'projects#index'
   resources :projects, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+  post "/projects/:id/commit",        to: "projects#commit",                  as: "commit"
+  post "/projects/:id/uncommit",      to: "projects#uncommit",                as: "uncommit"
 
   resource :admins, only: [] do
     resources :projects do

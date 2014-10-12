@@ -16,6 +16,36 @@
     end
   end
 
+  def commit
+    @project = Project.find(params[:id])
+    if session[:user_id] == @project.creator_id
+      redirect_to admins_project_path(@project)
+    else
+      @commitment = Commitment.create!(user_id: session[:user_id], project_id: @project.id)
+      respond_to do |format|
+        format.js do
+          render nothing: true
+        end
+        format.any do
+          redirect_to user_path(session[:user_id])
+        end
+      end
+    end
+  end
+
+  def uncommit
+    @commitment = Commitment.find_by(project_id: params[:id])
+    @commitment.destroy
+    respond_to do |format|
+      format.js do
+        render nothing: true
+      end
+      format.any do
+        redirect_to user_path(session[:user_id])
+      end
+    end
+  end
+
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
