@@ -1,4 +1,4 @@
-class ProjectsController < ApplicationController
+  class ProjectsController < ApplicationController
   def index
     @projects = Project.all
     if logged_in?
@@ -9,9 +9,23 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     if @project.save
+      @project.update(creator_id: session[:user_id])
       redirect_to admins_projects_path
     else
       render 'new'
+    end
+  end
+
+  def destroy
+    @project = Project.find(params[:id])
+    @project.destroy
+    respond_to do |format|
+      format.js do
+        render nothing: true
+      end
+      format.any do
+        redirect_to user_path(session[:user_id])
+      end
     end
   end
 
@@ -47,7 +61,8 @@ class ProjectsController < ApplicationController
     end
   end
 
-   def destroy
+
+  def destroy
     @project = Project.find(params[:id])
     @project.destroy
     respond_to do |format|
@@ -58,9 +73,31 @@ class ProjectsController < ApplicationController
         redirect_to user_path(session[:user_id])
       end
     end
-   end
+  end
 
-    private
+  def popularity_sort
+    @projects = Project.popularity_sort
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+
+  def recent_sort
+    @projects = Project.all
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+
+  def sort
+    @sort = params[:sort]
+    @projects = Project.sort_hash(@sort)
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+
+  private
 
   def project_params
     params.require(:project).permit(:title, :category, :location, :remote, :time_estimation, :description)
