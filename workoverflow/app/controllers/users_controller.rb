@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(name: params[:user][:name], email: params[:user][:email], password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
-    if @user.save
+    @user = User.create!(user_params)
+    if @user
       redirect_to login_form_path
     else
       render 'new'
@@ -17,8 +17,6 @@ class UsersController < ApplicationController
   end
 
   def login
-    p params
-    puts "-------------------TEST-----------------------------"
     @user = User.find_by_email(params[:email])
     if @user.authenticate(params[:password])
       session[:user_id] = @user.id
@@ -38,4 +36,9 @@ class UsersController < ApplicationController
     redirect_to projects_path
   end
 
+    private
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
 end
