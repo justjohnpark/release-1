@@ -1,24 +1,44 @@
 <%= render "layouts/users_header" %>
 
-<h2 id="projects_header">Projects</h2>
+<header>
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-lead-in">Let's find a project to work on!</div>
+            <div class="intro-heading">Post DBC - Release 1</div>
+            <a href="#projects-view" class="page-scroll btn btn-xl">See Current Projects</a>
+        </div>
+    </div>
+</header>
 
-<div class="btn-group">
-  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-    Sort By <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <li><%= link_to "Popularity", popularity_sort_path, remote: true %></li>
-    <li><%= link_to "Category", sort_path(sort: "category"), remote: true, project: 'category' %></li>
-    <li><%= link_to "Location", sort_path(sort: "location"), remote: true, id: 'location' %></li>
-    <li><%= link_to "Remote", sort_path(sort: "remote"), remote: true %></li>
-    <li><%= link_to "Recent", sort_path(sort: "created_at"), remote: true %></li>
-  </ul>
-</div>
-
-<br>
-
-<div id="projects">
-  <% @projects.reverse.each do |project| %>
-    <%= link_to project.title, project_path(project) %> (<%= project.category %>) - <%= project.votes.length %> Votes<br><br>
-  <% end %>
-</div>
+<section id="projects-view">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Projects</h2>
+                <h3 class="section-subheading text-muted">Work on anything. Work remotely. Find new friends.</h3>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    Sort By <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><%= link_to "Popularity", popularity_sort_path, remote: true %></li>
+                    <li><%= link_to "Category", sort_path(sort: "category"), remote: true, project: 'category' %></li>
+                    <li><%= link_to "Location", sort_path(sort: "location"), remote: true, id: 'location' %></li>
+                    <li><%= link_to "Remote", sort_path(sort: "remote"), remote: true %></li>
+                    <li><%= link_to "Recent", sort_path(sort: "created_at"), remote: true %></li>
+                  </ul>
+                </div>
+            </div>
+        </div><br>
+        <div class="row text-center">
+          <% @projects.reverse.each do |project| %>
+            <div id="projects">
+              <div class="col-md-4">
+                  <h4 class="service-heading"><%= link_to project.title, project_path(project) %> - <%= project.votes.length %> Votes</h4>
+                  <p class="text-muted"><%= project.description %></p>
+                </div>
+            </div>
+          <% end %>
+        </div>
+    </div>
+</section>
