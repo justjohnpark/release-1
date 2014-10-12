@@ -12,10 +12,9 @@ describe "User browsing" do
 
     it "can login" do
       visit login_path
-
-      fill_in 'email', with: "bob@gmail.com"
-      fill_in 'password', with: "freedom"
-
+      @user= User.create(name: "Jim", email: "b@gmail.com", password: "freedom", password_confirmation: "freedom")
+      fill_in 'Enter your email', with: @user.email
+      fill_in 'Enter your password', with: @user.password
       click_on('Login')
     end
 

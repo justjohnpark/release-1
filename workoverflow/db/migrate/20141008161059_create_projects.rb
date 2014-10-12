@@ -9,7 +9,7 @@ class CreateProjects < ActiveRecord::Migration
       t.integer :time_estimation
       t.integer :creator_id
 
-      add_index :projects, :creator_id
+      # add_index :projects, :creator_id
 
       t.timestamps
     end

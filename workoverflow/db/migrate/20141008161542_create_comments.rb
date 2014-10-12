@@ -5,8 +5,8 @@ class CreateComments < ActiveRecord::Migration
       t.integer :user_id
       t.integer :project_id
 
-      add_index :comments, :user_id
-      add_index :comments, :project_id
+      # add_index :comments, :user_id
+      # add_index :comments, :project_id
 
       t.timestamps
     end

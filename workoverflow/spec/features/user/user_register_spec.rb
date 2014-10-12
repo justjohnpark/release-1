@@ -2,13 +2,17 @@ require 'spec_helper'
 
 describe "User browsing" do
   context "on register page" do
-    let(:user) { User.new(name: "Bob Bilbob", email: "bob@gmail.com", password: "freedom", password_confirmation: "freedom") }
-
+    before(:each) do
+      @user = User.new(name: "Tim", email: "t@gmail.com", password: "12345", password_confirmation: "12345")
+    end
     it "has a submit button" do
       visit new_user_path
-
-      expect(page).to have_selector("input[type=submit][value='Register']")
-      click_button("Register")
+      expect(page).to have_button("Submit")
+      fill_in "Enter your name", with: @user.name
+      fill_in "Enter your email", with: @user.email
+      fill_in "Enter your password", with: @user.password
+      fill_in "Please confirm your password", with: @user.password_confirmation
+      click_button 'Submit'
     end
 
     it "has an input field for name" do

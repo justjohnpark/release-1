@@ -5,8 +5,8 @@ require 'spec_helper'
 describe ProjectsController do
   before(:each) do
     @user = User.create!(name: "Bob Swinsong", email: "bob@gmail.com", password: "12345", password_confirmation: "12345") 
-    @project1 = Project.create!(title: "Yolo", description: "yo", category: "yo", location: "San Francisco", remote: true, time_estimation: 17)
-    @project = Project.create!(title: "Y", description: "Learning how to make things way fresh.", category: "Javascript", location: "San Francisco", remote: true, time_estimation: 7 )
+    @project1 = Project.create!(title: "Yolo", description: "yo", category: "yo", location: "San Francisco", remote: true, time_estimation: 17,creator_id: @user.id)
+    @project = Project.create!(title: "Y", description: "Learning how to make things way fresh.", category: "Javascript", location: "San Francisco", remote: true, time_estimation: 7,creator_id: @user.id )
     login(@user)
    
   
