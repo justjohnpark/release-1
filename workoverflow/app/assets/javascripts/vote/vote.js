@@ -1,5 +1,4 @@
 $(function(){
-  console.log("page loaded")
     $(".comment-block form").on("ajax:success", function(event, data, status, xhr){
     console.log(event.target)
     var $clicked = $(this)
