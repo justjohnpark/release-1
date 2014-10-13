@@ -5,7 +5,7 @@ class Project < ActiveRecord::Base
   has_many :collaborators, through: :commitments, source: :user
   has_many :votes, as: :voteable
 
-  validates :creator, presence: true
+  # validates :creator_id, presence: true
   validates :title, presence: true
   validates :description, presence: true
   validates :category, presence: true

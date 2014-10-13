@@ -5,7 +5,7 @@ $(function(){
       var content = $("div.new-comment-block textarea").val()
       var contentRes = pattern.test(content)
       if (contentRes === false){
-        $(".new-comment-block").prepend("Comment cannot be blank");
+        $(".new-comment-block").prepend("No blank comments, please.");
         $("div.new-comment-block textarea").val("");
         $(this).show();
       }else{
